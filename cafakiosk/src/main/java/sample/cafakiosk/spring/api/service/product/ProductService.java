@@ -1,0 +1,26 @@
+package sample.cafakiosk.spring.api.service.product;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import sample.cafakiosk.spring.api.service.product.response.ProductResponse;
+import sample.cafakiosk.spring.domain.product.Product;
+import sample.cafakiosk.spring.domain.product.ProductRepository;
+import sample.cafakiosk.spring.domain.product.ProductSellingStatus;
+
+@Service
+@RequiredArgsConstructor
+public class ProductService {
+
+	private final ProductRepository productRepository;
+
+	public List<ProductResponse> getSellingProducts() {
+		List<Product> products = productRepository.findAllBySellingStatusIn(
+				ProductSellingStatus.forDisplay());
+
+		return products.stream()
+				.map(ProductResponse::of)
+				.collect(Collectors.toList());
+	}
+}

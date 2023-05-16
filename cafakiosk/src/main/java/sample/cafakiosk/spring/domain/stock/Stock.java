@@ -35,4 +35,16 @@ public class Stock extends BaseEntity {
 				.quantity(quantity)
 				.build();
 	}
+
+	public boolean isQuantityLessThan(int quantity) {
+		return this.quantity < quantity;
+	}
+
+	public void deductQuantity(int quantity) {
+		if (isQuantityLessThan(quantity)) {
+			throw new IllegalArgumentException("재고 수량이 부족합니다.");
+		}
+
+		this.quantity -= quantity;
+	}
 }

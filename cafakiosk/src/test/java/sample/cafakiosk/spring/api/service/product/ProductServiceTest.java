@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import sample.cafakiosk.spring.api.controller.product.request.ProductCreateRequest;
+import sample.cafakiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import sample.cafakiosk.spring.api.service.product.response.ProductResponse;
 import sample.cafakiosk.spring.domain.product.Product;
 import sample.cafakiosk.spring.domain.product.ProductRepository;
@@ -41,7 +42,7 @@ class ProductServiceTest {
 		Product product = createProduct("001", HANDMADE, SELLING, "아메리카노", 4000);
 		productRepository.save(product);
 
-		ProductCreateRequest request = ProductCreateRequest.builder()
+		ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
 				.type(HANDMADE)
 				.sellingStatus(SELLING)
 				.name("카푸치노")
@@ -69,7 +70,7 @@ class ProductServiceTest {
 	@Test
 	void createProductWhenProductIsEmpty() {
 		// given
-		ProductCreateRequest request = ProductCreateRequest.builder()
+		ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
 				.type(HANDMADE)
 				.sellingStatus(SELLING)
 				.name("카푸치노")

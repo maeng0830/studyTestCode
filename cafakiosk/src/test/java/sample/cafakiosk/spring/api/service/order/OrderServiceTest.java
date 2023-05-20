@@ -10,7 +10,6 @@ import static sample.cafakiosk.spring.domain.product.ProductType.HANDMADE;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import sample.cafakiosk.spring.api.controller.order.request.OrderCreateRequest;
+import sample.cafakiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import sample.cafakiosk.spring.api.service.order.response.OrderResponse;
 import sample.cafakiosk.spring.domain.order.OrderRepository;
 import sample.cafakiosk.spring.domain.orderproduct.OrderProductRepository;
@@ -65,7 +65,7 @@ class OrderServiceTest {
 
 		productRepository.saveAll(List.of(product1, product2, product3));
 
-		OrderCreateRequest request = OrderCreateRequest.builder()
+		OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
 				.productNumbers(List.of("001", "002"))
 				.build();
 
@@ -99,7 +99,7 @@ class OrderServiceTest {
 		Stock stock2 = Stock.create("002", 2);
 		stockRepository.saveAll(List.of(stock1, stock2));
 
-		OrderCreateRequest request = OrderCreateRequest.builder()
+		OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
 				.productNumbers(List.of("001", "001", "002", "003"))
 				.build();
 
@@ -145,7 +145,7 @@ class OrderServiceTest {
 		stock1.deductQuantity(1); // todo
 		stockRepository.saveAll(List.of(stock1, stock2));
 
-		OrderCreateRequest request = OrderCreateRequest.builder()
+		OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
 				.productNumbers(List.of("001", "001", "002", "003"))
 				.build();
 
@@ -169,7 +169,7 @@ class OrderServiceTest {
 
 		productRepository.saveAll(List.of(product1, product2, product3));
 
-		OrderCreateRequest request = OrderCreateRequest.builder()
+		OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
 				.productNumbers(List.of("001", "001"))
 				.build();
 

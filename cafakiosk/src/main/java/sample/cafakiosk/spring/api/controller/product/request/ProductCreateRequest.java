@@ -1,14 +1,11 @@
 package sample.cafakiosk.spring.api.controller.product.request;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import sample.cafakiosk.spring.api.service.product.request.ProductCreateServiceRequest;
-import sample.cafakiosk.spring.domain.product.Product;
 import sample.cafakiosk.spring.domain.product.ProductSellingStatus;
 import sample.cafakiosk.spring.domain.product.ProductType;
 
@@ -31,15 +28,15 @@ public class ProductCreateRequest {
 
 	@Builder
 	private ProductCreateRequest(ProductType type,
-								ProductSellingStatus sellingStatus, String name, int price) {
+								 ProductSellingStatus sellingStatus, String name, int price) {
 		this.type = type;
 		this.sellingStatus = sellingStatus;
 		this.name = name;
 		this.price = price;
 	}
 
-	public ProductCreateServiceRequest toServiceRequest() {
-		return ProductCreateServiceRequest.builder()
+	public sample.cafakiosk.spring.api.service.product.request.ProductCreateServiceRequest toServiceRequest() {
+		return sample.cafakiosk.spring.api.service.product.request.ProductCreateServiceRequest.builder()
 				.type(type)
 				.sellingStatus(sellingStatus)
 				.name(name)

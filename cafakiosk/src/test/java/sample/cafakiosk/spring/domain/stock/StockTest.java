@@ -9,6 +9,13 @@ import org.junit.jupiter.api.Test;
 
 class StockTest {
 
+	/**
+	 * 테스트 간 독립성을 보장하자
+	 * 두 개 이상의 테스트가 공통된 자원을 사용하지 않도록 한다.
+	 * 테스트 간에 영향을 미쳐서 올바른 검증이 불가능할 수 있다.
+	 */
+//	private static final Stock stock = Stock.create("001", 1);
+
 	@DisplayName("재고 수량이 제공된 수량보다 작은지 확인한다.")
 	@Test
 	void isQuantityLessThan() {

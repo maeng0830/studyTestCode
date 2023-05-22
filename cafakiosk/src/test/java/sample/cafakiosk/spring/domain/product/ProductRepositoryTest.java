@@ -13,11 +13,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
+import sample.cafakiosk.spring.IntegrationTestSupport;
 
-@ActiveProfiles("test")
+
+@Transactional
 //@SpringBootTest // 테스트 시 스프링 구동. 모든 빈을 사용할 수 있음
-@DataJpaTest // 테스트 시 스프링 구동. JPA 관련 빈을 사용할 수 있음, @Transactionl 적용
-class ProductRepositoryTest {
+// @DataJpaTest // 테스트 시 스프링 구동. JPA 관련 빈을 사용할 수 있음, @Transactionl 적용
+class ProductRepositoryTest extends IntegrationTestSupport {
 
 	@Autowired
 	private ProductRepository productRepository;

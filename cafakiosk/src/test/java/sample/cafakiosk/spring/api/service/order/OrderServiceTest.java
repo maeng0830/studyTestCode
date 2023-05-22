@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import sample.cafakiosk.spring.IntegrationTestSupport;
 import sample.cafakiosk.spring.api.controller.order.request.OrderCreateRequest;
 import sample.cafakiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import sample.cafakiosk.spring.api.service.order.response.OrderResponse;
@@ -27,10 +28,7 @@ import sample.cafakiosk.spring.domain.product.ProductType;
 import sample.cafakiosk.spring.domain.stock.Stock;
 import sample.cafakiosk.spring.domain.stock.StockRepository;
 
-@ActiveProfiles("test")
-//@Transactional
-@SpringBootTest
-class OrderServiceTest {
+class OrderServiceTest extends IntegrationTestSupport {
 
 	@Autowired
 	private ProductRepository productRepository;
@@ -131,6 +129,14 @@ class OrderServiceTest {
 				);
 	}
 
+	/**
+	 * 테스트 환경(given 절)의 독립성을 보장하자.
+	 * 해당 테스트에서 실제 검증하고자 하는 것은 orderService.createOrder()
+	 * 그러나 테스트 코드에는 다른 기능인 stock1.deductQuantity(1)이 사용되고 있다.
+	 * 이런 경우 테스트 코드를 이해하기 위해 다른 기능에 대한 이해가 필요하며,
+	 * 다른 기능에 문제가 발생할 경우 해당 테스트에도 문제가 발생한다.
+	 * 즉 when, then에 대한 검증이 아닌 given에 대한 검증이 되는 것이다.
+	 */
 	@DisplayName("재고가 부족한 상품으로 주문을 생성하려는 경우 예외가 발생한다.")
 	@Test
 	void createOrderWithNoStock() {

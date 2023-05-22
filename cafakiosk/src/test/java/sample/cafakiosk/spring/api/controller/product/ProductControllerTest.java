@@ -8,31 +8,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
+import sample.cafakiosk.spring.ControllerTestSupport;
 import sample.cafakiosk.spring.api.controller.product.request.ProductCreateRequest;
-import sample.cafakiosk.spring.api.service.product.ProductService;
 import sample.cafakiosk.spring.api.service.product.response.ProductResponse;
 import sample.cafakiosk.spring.domain.product.ProductSellingStatus;
 import sample.cafakiosk.spring.domain.product.ProductType;
 
-@WebMvcTest(controllers = ProductController.class) // controller 관련 빈들을 사용하기 위한 애노테이션
-class ProductControllerTest {
-
-	@Autowired
-	private MockMvc mockMvc;
-
-	@Autowired
-	private ObjectMapper objectMapper; // json <-> Object (직렬화, 역직렬화)
-
-	@MockBean //
-	private ProductService productService;
+class ProductControllerTest extends ControllerTestSupport {
 
 	@DisplayName("신규 상품을 등록한다.")
 	@Test
